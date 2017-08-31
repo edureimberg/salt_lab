@@ -87,6 +87,9 @@ Vagrant.configure("2") do |config|
     	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
     	apt-get update
     	apt-get install -y salt-minion
+      echo "master: 10.10.10.1\nid: salt-minion1" > /etc/salt/minion.d/local.conf
+      rm /etc/salt/minion_id
+      service salt-minion restart
     SHELL
   end
 
@@ -98,6 +101,9 @@ Vagrant.configure("2") do |config|
     	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
     	apt-get update
     	apt-get install -y salt-minion
+      echo "master: 10.10.10.1\nid: salt-minion2" > /etc/salt/minion.d/local.conf
+      rm /etc/salt/minion_id
+      service salt-minion restart
     SHELL
   end
 
