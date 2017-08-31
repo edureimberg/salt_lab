@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.define "salt_minion1" do |salt_minion1|
+  config.vm.define "salt-minion1" do |salt_minion1|
     salt_minion1.vm.box = "ubuntu/trusty64"
     salt_minion1.vm.network "public_network", ip: "10.10.10.2"
     salt_minion1.vm.provision "shell", inline: <<-SHELL
@@ -90,7 +90,7 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.define "salt_minion2" do |salt_minion2|
+  config.vm.define "salt-minion2" do |salt_minion2|
     salt_minion2.vm.box = "ubuntu/trusty64"
     salt_minion2.vm.network "public_network", ip: "10.10.10.3"
     salt_minion2.vm.provision "shell", inline: <<-SHELL
