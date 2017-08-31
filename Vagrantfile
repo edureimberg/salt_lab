@@ -71,16 +71,34 @@ Vagrant.configure("2") do |config|
   config.vm.define "salt-master" do |salt_master|
     salt_master.vm.box = "ubuntu/trusty64"
     salt_master.vm.network "public_network", ip: "10.10.10.1"
+    salt_master.vm.provision "shell", inline: <<-SHELL
+    	wget -O - https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+    	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
+    	apt-get update
+    	apt-get install -y salt-master
+    SHELL
   end
 
   config.vm.define "salt_minion1" do |salt_minion1|
     salt_minion1.vm.box = "ubuntu/trusty64"
     salt_minion1.vm.network "public_network", ip: "10.10.10.2"
+    salt_minion1.vm.provision "shell", inline: <<-SHELL
+    	wget -O - https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+    	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
+    	apt-get update
+    	apt-get install -y salt-minion
+    SHELL
   end
 
   config.vm.define "salt_minion2" do |salt_minion2|
     salt_minion2.vm.box = "ubuntu/trusty64"
     salt_minion2.vm.network "public_network", ip: "10.10.10.3"
+    salt_minion2.vm.provision "shell", inline: <<-SHELL
+    	wget -O - https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+    	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
+    	apt-get update
+    	apt-get install -y salt-minion
+    SHELL
   end
 
 end
