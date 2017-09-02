@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "salt-master" do |salt_master|
     salt_master.vm.box = "ubuntu/trusty64"
     salt_master.vm.network "public_network", ip: "10.10.10.1"
+    salt_master.vm.synced_folder "./salt", "/srv/salt"
     salt_master.vm.provision "shell", inline: <<-SHELL
     	wget -O - https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
     	echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
