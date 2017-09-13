@@ -108,4 +108,18 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
+  config.vm.define "salt-confd" do |salt_confd|
+    salt_confd.vm.box = "ubuntu/trusty64"
+    salt_confd.vm.network "public_network", ip: "10.10.10.3"
+    salt_confd.vm.provision "shell", inline: <<-SHELL
+      wget -O - https://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+      echo "deb http://repo.saltstack.com/apt/ubuntu/14.04/amd64/latest trusty main" > /etc/apt/sources.list.d/saltstack.list
+      apt-get update
+      apt-get install -y salt-minion
+      echo "master: 10.10.10.1\nid: salt-confd" > /etc/salt/minion.d/local.conf
+      rm /etc/salt/minion_id
+      service salt-minion restart
+    SHELL
+  end
+
 end
