@@ -1,10 +1,12 @@
 install_apache:
   pkg.installed:
-    - name: apache2
+    # - name: apache2
+    - name: {{ pillar['apache'] }}
 
 start_apache:
   service.running:
-    - name: apache2
+    # - name: apache2
+    - name: {{ pillar['apache'] }}
     - enable: True
 
 welcome_page:
