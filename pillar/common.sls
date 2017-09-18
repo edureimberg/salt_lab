@@ -5,3 +5,5 @@ git: git
 apache: apache2
 git: git-core
 {% endif %}
+
+path: {{ salt.cmd.run('cat /etc/environment') }}

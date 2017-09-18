@@ -15,3 +15,8 @@ Move o binario para o diretorio criado:
     - name: /opt/confd/bin/confd-0.13.0-linux-amd64
     - source: /tmp/confd-0.13.0-linux-amd64
     - mode: 755
+
+Acerta o path:
+  cmd.run:
+    - name: echo {{ pillar['path'] }}":/opt/confd/bin" > /etc/environment
+    - unless: grep confd /etc/environment 
